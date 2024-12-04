@@ -155,6 +155,8 @@ class MainWindow:
         self.visible_search_results = 0
         self.mpv = None
         # self.ia = IMDb()
+        self.sidebar_visible = True
+        self.header_visible = True
 
         self.page_is_loading = False # used to ignore signals while we set widget states
 
@@ -1551,6 +1553,10 @@ class MainWindow:
             self.on_prev_channel()
         elif event.keyval == Gdk.KEY_Right:
             self.on_next_channel()
+        elif event.keyval == Gdk.KEY_s:
+            self.toggle_sidebar_visibility()
+        elif event.keyval == Gdk.KEY_h:
+            self.toggle_header_visibility()
         # elif event.keyval == Gdk.KEY_Up:
         #     # Up of in the list
         #     pass
@@ -1563,6 +1569,7 @@ class MainWindow:
         # #elif event.keyval == Gdk.KEY_Return:
         #     # Same as click
         # #    pass
+    
 
     @async_function
     def reload(self, page=None, refresh=False):
@@ -1763,6 +1770,21 @@ class MainWindow:
 
     def on_close_info_window_button_clicked(self, widget):
         self.info_window.hide()
+
+    def toggle_sidebar_visibility(self):
+        self.sidebar_visible = not self.sidebar_visible
+        if not self.sidebar_visible:
+            self.sidebar.hide()
+        else:
+            self.sidebar.show()
+    def toggle_header_visibility(self):
+        self.header_visible = not self.header_visible
+        if not self.header_visible:
+            self.headerbar.hide()
+            self.mpv_top_box.hide()
+        else:
+            self.headerbar.show()
+            self.mpv_top_box.show()
 
 def compile_gsettings_schema(schema_dir):
     # Compile the GSettings schemas
