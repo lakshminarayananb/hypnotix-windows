@@ -1801,10 +1801,10 @@ def set_gsettings_schema_dir(schema_dir):
 
 if __name__ == "__main__":
     schema_directory = "usr/share/glib-2.0/schemas/"
-    
+
     # Compile the schemas. Added for Windows in specific.
     compile_gsettings_schema(schema_directory)
-    
+
     # Set the environment variable. Added for Windows in specific.
     set_gsettings_schema_dir(schema_directory)
 
